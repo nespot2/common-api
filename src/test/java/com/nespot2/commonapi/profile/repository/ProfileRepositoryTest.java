@@ -49,7 +49,6 @@ public class ProfileRepositoryTest {
         final Profile profile = Profile.builder()
                 .member(member)
                 .commonDate(new CommonDate(OffsetDateTime.now(), OffsetDateTime.now()))
-                .represent(YesNo.YES)
                 .name("개발을 사랑하는 5년차 웹 개발자")
                 .build();
 
