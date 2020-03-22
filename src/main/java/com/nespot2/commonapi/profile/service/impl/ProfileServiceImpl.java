@@ -1,6 +1,7 @@
 package com.nespot2.commonapi.profile.service.impl;
 
 import com.nespot2.commonapi.member.domain.Member;
+import com.nespot2.commonapi.member.exception.NotFoundMemberException;
 import com.nespot2.commonapi.member.repository.MemberRepository;
 import com.nespot2.commonapi.profile.domain.Profile;
 import com.nespot2.commonapi.profile.domain.dto.ProfileDto;
@@ -28,9 +29,9 @@ public class ProfileServiceImpl implements ProfileService {
     public ProfileDto getProfile(long memberId) {
 
         final Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException(""));
+                .orElseThrow(() -> new NotFoundMemberException("조회된 member가 없습니다."));
         final Profile profile = profileRepository.findFirstByMember(member)
-                .orElseThrow(() -> new RuntimeException(""));
+                .orElseThrow(() -> new RuntimeException("조회된 profile이 없습니다."));
 
         return ProfileDto
                 .builder()

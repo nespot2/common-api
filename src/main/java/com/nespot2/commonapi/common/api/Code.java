@@ -16,7 +16,8 @@ public enum Code {
     ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버에 에러가 발생하였습니다."),
     UNAUTHENTICATED(HttpStatus.FORBIDDEN, "잘못된 인증 정보입니다."),
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED, "권한이 없습니다."),
-    NOT_FOUND_USER(HttpStatus.NOT_FOUND, "not found user");
+    NOT_FOUND_MEMBER(HttpStatus.NOT_FOUND, "not found user"),
+    NOT_FOUND_PROFILE(HttpStatus.NOT_FOUND, "not found profile");
 
     private HttpStatus status;
 

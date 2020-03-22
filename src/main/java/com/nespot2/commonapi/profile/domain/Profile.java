@@ -38,21 +38,17 @@ public class Profile {
     @Embedded
     private CommonDate commonDate;
 
-    @Enumerated
-    private YesNo represent;
-
     private OffsetDateTime deleteAt;
 
     @Enumerated
     private YesNo deleted;
 
     @Builder
-    public Profile(String name, Member member, ProfileDescription profileDescription, CommonDate commonDate, YesNo represent, OffsetDateTime deleteAt, YesNo deleted) {
+    public Profile(String name, Member member, ProfileDescription profileDescription, CommonDate commonDate, OffsetDateTime deleteAt, YesNo deleted) {
         this.name = name;
         this.member = member;
         this.profileDescription = profileDescription;
         this.commonDate = commonDate;
-        this.represent = represent;
         this.deleteAt = deleteAt;
         this.deleted = deleted;
     }
