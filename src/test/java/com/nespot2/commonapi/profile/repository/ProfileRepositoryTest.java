@@ -1,7 +1,6 @@
 package com.nespot2.commonapi.profile.repository;
 
 import com.nespot2.commonapi.common.domain.CommonDate;
-import com.nespot2.commonapi.common.domain.YesNo;
 import com.nespot2.commonapi.member.domain.Member;
 import com.nespot2.commonapi.member.repository.MemberRepository;
 import com.nespot2.commonapi.profile.domain.Profile;
