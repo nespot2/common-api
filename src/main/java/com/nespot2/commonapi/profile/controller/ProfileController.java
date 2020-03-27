@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author nespot2
- * @versio 0.0.1
+ * @version 0.0.1
  * @since 2020/02/16
  **/
 @RestController

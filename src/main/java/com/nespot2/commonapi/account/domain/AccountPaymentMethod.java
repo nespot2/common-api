@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 /**
  * @author nespot2
- * @versio 0.0.1
+ * @version 0.0.1
  * @since 2020/03/26
  * 가계부 지출/수입 방법(현금,체크카드,신용카드, 신한은행 등등)
  **/

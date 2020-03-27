@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
+ *
  * @author nespot2
- * @versio 0.0.1
+ * @version 0.0.1
  * @since 2020/03/08
  **/
 @Service
@@ -24,6 +25,10 @@ public class ProfileServiceImpl implements ProfileService {
 
     private final MemberRepository memberRepository;
 
+    /**
+     * @param memberId - 회원 id
+     * @return profile 요약 정보를 반환합니다.
+     */
     @Override
     @Transactional(readOnly = true)
     public ProfileDto getProfile(long memberId) {

@@ -9,7 +9,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 /**
  * @author nespot2
- * @versio 0.0.1
+ * @version 0.0.1
  * @since 2020/02/16
  **/
 @Configuration
