@@ -40,7 +40,7 @@ sourceSets {
     getByName("main").java.srcDirs(listOf("src/main/java", querydslSrcDir))
 }
 
-val snippetsDir by extra { file("build/generated-snippets") }
+val snippetsDir by extra { file("$buildDir/generated-snippets") }
 
 tasks {
 
