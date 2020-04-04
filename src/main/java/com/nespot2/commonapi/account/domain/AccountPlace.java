@@ -35,8 +35,7 @@ public class AccountPlace {
     @Column(nullable = false)
     private CountryCode countryCode;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private String zoneCode;
 
     @Builder

@@ -31,10 +31,6 @@ public class AccountCategoryGroup {
     @Column(nullable = false)
     private AccountCategoryGroupType type;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private IncomeType incomeType;
-
     @Embedded
     private CommonDate commonDate;
 
@@ -43,10 +39,9 @@ public class AccountCategoryGroup {
     private YesNo enabled;
 
     @Builder
-    public AccountCategoryGroup(String name, AccountCategoryGroupType type, IncomeType incomeType, CommonDate commonDate, YesNo enabled) {
+    public AccountCategoryGroup(String name, AccountCategoryGroupType type, CommonDate commonDate, YesNo enabled) {
         this.name = name;
         this.type = type;
-        this.incomeType = incomeType;
         this.commonDate = commonDate;
         this.enabled = enabled;
     }
