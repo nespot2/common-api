@@ -1,0 +1,26 @@
+[[introduction]]
+== 소개
+
+common-api Asccidoc test 중입니다!
+
+
+==== curl request
+
+include::{snippets}/index/curl-request.adoc[]
+
+==== http request
+
+include::{snippets}/index/http-request.adoc[]
+
+==== http response
+
+include::{snippets}/index/http-response.adoc[]
+
+==== request body
+
+include::{snippets}/index/request-body.adoc[]
+
+==== reponse body
+
+include::{snippets}/index/response-body.adoc[]
+

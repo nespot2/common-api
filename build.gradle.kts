@@ -53,8 +53,6 @@ tasks {
         dependsOn(test)
     }
 
-
-
     bootJar {
         dependsOn(asciidoctor)
         from("$buildDir/asciidoc/html5") {
@@ -62,7 +60,6 @@ tasks {
         }
     }
 }
-
 
 
 dependencies {
