@@ -27,10 +27,6 @@ public class AccountCategoryGroup {
     @Column(nullable = false)
     private String name;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private AccountCategoryGroupType type;
-
     @Embedded
     private CommonDate commonDate;
 
@@ -38,11 +34,15 @@ public class AccountCategoryGroup {
     @Column(nullable = false)
     private YesNo enabled;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "root_id")
+    private AccountCategoryRoot accountCategoryRoot;
+
     @Builder
-    public AccountCategoryGroup(String name, AccountCategoryGroupType type, CommonDate commonDate, YesNo enabled) {
+    public AccountCategoryGroup(String name, CommonDate commonDate, YesNo enabled, AccountCategoryRoot accountCategoryRoot) {
         this.name = name;
-        this.type = type;
         this.commonDate = commonDate;
         this.enabled = enabled;
+        this.accountCategoryRoot = accountCategoryRoot;
     }
 }
