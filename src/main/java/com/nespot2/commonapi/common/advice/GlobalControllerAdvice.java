@@ -19,10 +19,10 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResult> handlerException(MethodArgumentNotValidException e) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Invalid Parameter(s):");
+        sb.append("Invalid Parameter(s): ");
 
         for (ObjectError objectError : e.getBindingResult().getAllErrors()) {
-            sb.append(objectError.getCode());
+            sb.append(objectError.getCode()+" ");
         }
 
         return ResponseEntity.badRequest().body(ApiResult.fail(Code.BAD_REQUEST, sb.toString()));
