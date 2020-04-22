@@ -77,6 +77,7 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
     implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.7")
+    implementation("org.passay:passay:1.6.0")
 
     asciidoctor("org.springframework.restdocs:spring-restdocs-asciidoctor:2.0.4.RELEASE")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc:2.0.4.RELEASE")

@@ -32,4 +32,9 @@ public class GlobalControllerAdvice {
     public ResponseEntity<ApiResult> exceptionHandler(Exception e) {
         return ApiResult.fail(Code.ERROR, e.getMessage()).createResponseEntity();
     }
+
+    @ExceptionHandler(Nespot2BusinessException.class)
+    public ResponseEntity<ApiResult> businessException(Nespot2BusinessException e) {
+        return ApiResult.fail(e.getCode(), e.getCode().getMessage()).createResponseEntity();
+    }
 }

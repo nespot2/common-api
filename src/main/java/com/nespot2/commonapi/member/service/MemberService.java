@@ -1,14 +1,16 @@
 package com.nespot2.commonapi.member.service;
 
-import com.nespot2.commonapi.member.domain.Member;
-
-import java.util.Optional;
+import com.nespot2.commonapi.member.domain.dto.MemberDto;
+import com.nespot2.commonapi.member.domain.dto.MemberRegisterDto;
 
 /**
  * @author nespot2
  * @version 0.0.1
  * @since 2020/03/08
+ * 회원 service
  **/
 public interface MemberService {
-    Optional<Member> findMember(long memberId);
+    MemberDto findMember(long memberId);
+
+    void createMember(MemberRegisterDto memberRegisterDto);
 }

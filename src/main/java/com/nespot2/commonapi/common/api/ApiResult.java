@@ -1,5 +1,6 @@
 package com.nespot2.commonapi.common.api;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.time.OffsetDateTime;
  **/
 @NoArgsConstructor
 @Getter
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class ApiResult<T> {
 
     @JsonProperty("c")
@@ -35,6 +37,15 @@ public class ApiResult<T> {
         this.data = data;
         this.message = message;
         this.timestamp = timestamp;
+    }
+
+    public static <T> ApiResult<T> ok() {
+        return ApiResult
+                .<T>builder()
+                .code(Code.SUCCESS)
+                .message(Code.SUCCESS.getMessage())
+                .timestamp(OffsetDateTime.now())
+                .build();
     }
 
     public static <T> ApiResult<T> ok(T data) {

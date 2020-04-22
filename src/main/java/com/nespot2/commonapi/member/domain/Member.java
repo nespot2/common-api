@@ -46,8 +46,11 @@ public class Member {
     @Enumerated
     private YesNo deleted;
 
+    @Column(nullable = false)
+    private String cellPhoneNumber;
+
     @Builder
-    public Member(String name, String email, String password, MemberRole role, CommonDate commonDate, OffsetDateTime lastVisitAt, OffsetDateTime deletedAt, YesNo deleted) {
+    public Member(String name, String email, String password, MemberRole role, CommonDate commonDate, OffsetDateTime lastVisitAt, OffsetDateTime deletedAt, YesNo deleted, String cellPhoneNumber) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -56,5 +59,6 @@ public class Member {
         this.lastVisitAt = lastVisitAt;
         this.deletedAt = deletedAt;
         this.deleted = deleted;
+        this.cellPhoneNumber = cellPhoneNumber;
     }
 }
