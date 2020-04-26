@@ -24,8 +24,14 @@ public class MemberController {
 
     private final MemberService memberService;
 
+    /**
+     * 회원 가입 API
+     *
+     * @param memberRegisterDto - 회원 정보
+     * @return ResponseEntity
+     */
     @PostMapping
-    public ResponseEntity<ApiResult> createMember(@Valid @RequestBody MemberRegisterDto memberRegisterDto){
+    public ResponseEntity<ApiResult> createMember(@Valid @RequestBody MemberRegisterDto memberRegisterDto) {
         memberService.createMember(memberRegisterDto);
         return ApiResult.ok().createResponseEntity();
     }

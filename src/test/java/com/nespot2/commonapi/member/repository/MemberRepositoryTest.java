@@ -8,11 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +25,6 @@ import static org.assertj.core.api.Assertions.assertThat;
  **/
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
 public class MemberRepositoryTest {
 
     @Autowired
@@ -33,6 +34,7 @@ public class MemberRepositoryTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
+    @Commit
     public void test() {
 
         final Member member = Member.builder()
@@ -43,6 +45,7 @@ public class MemberRepositoryTest {
                 .commonDate(new CommonDate(OffsetDateTime.now(), OffsetDateTime.now()))
                 .name("이재혁")
                 .role(MemberRole.MASTER)
+                .cellPhoneNumber("01000000000")
                 .build();
 
         memberRepository.save(member);
@@ -51,5 +54,22 @@ public class MemberRepositoryTest {
 
         assertThat(all.size()).isEqualTo(1);
 
+    }
+
+    @Test
+    public void test2(){
+        final Optional<Member> email = memberRepository.findFirstByEmail("nespot2@gmail.com");
+        assertThat(email.isPresent()).isTrue();
+    }
+
+    @Test
+    public void test3(){
+        final Optional<Member> member = memberRepository.findFirstByEmail("nespot2@gmail.com");
+
+        assertThat(member.isPresent()).isTrue();
+
+        final String password = member.get().getPassword();
+
+        assertThat(passwordEncoder.matches("hello1234!",password)).isTrue();
     }
 }
