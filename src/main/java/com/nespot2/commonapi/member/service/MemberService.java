@@ -16,5 +16,4 @@ public interface MemberService {
     void createMember(MemberRegisterDto memberRegisterDto);
 
     MemberDto login(LoginDto loginDto);
-
 }

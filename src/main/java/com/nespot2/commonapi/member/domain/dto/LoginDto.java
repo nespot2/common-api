@@ -1,12 +1,9 @@
 package com.nespot2.commonapi.member.domain.dto;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author nespot2
@@ -18,12 +15,13 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class LoginDto {
 
-    @NotNull
-    @NotBlank
-    @Email
     private String email;
 
-    @NotNull
-    @NotBlank
     private String password;
+
+    @Builder
+    public LoginDto(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

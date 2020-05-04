@@ -23,6 +23,7 @@ public class MemberMapper {
                 .modifiedAt(member.getCommonDate().getModifiedAt())
                 .deletedAt(member.getDeletedAt())
                 .lastVisitAt(member.getLastVisitAt())
+                .password(member.getPassword())
                 .build();
     }
 }

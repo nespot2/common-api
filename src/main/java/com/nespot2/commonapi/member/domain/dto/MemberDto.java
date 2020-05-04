@@ -36,8 +36,10 @@ public class MemberDto {
 
     private YesNo deleted;
 
+    private String password;
+
     @Builder
-    public MemberDto(long id, String name, String email, MemberRole memberRole, OffsetDateTime modifiedAt, OffsetDateTime createdAt, OffsetDateTime lastVisitAt, OffsetDateTime deletedAt, YesNo deleted) {
+    public MemberDto(long id, String name, String email, MemberRole memberRole, OffsetDateTime modifiedAt, OffsetDateTime createdAt, OffsetDateTime lastVisitAt, OffsetDateTime deletedAt, YesNo deleted, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -47,5 +49,6 @@ public class MemberDto {
         this.lastVisitAt = lastVisitAt;
         this.deletedAt = deletedAt;
         this.deleted = deleted;
+        this.password = password;
     }
 }

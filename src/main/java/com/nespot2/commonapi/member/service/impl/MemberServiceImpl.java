@@ -12,6 +12,7 @@ import com.nespot2.commonapi.member.domain.dto.MemberRegisterDto;
 import com.nespot2.commonapi.member.repository.MemberRepository;
 import com.nespot2.commonapi.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,7 +92,7 @@ public class MemberServiceImpl implements MemberService {
      *
      * @param loginDto - 로그인 정보
      * @return MemberDto - 회원정보
-     * @throws Nespot2BusinessException
+     * @throws InternalAuthenticationServiceException
      */
     @Override
     public MemberDto login(LoginDto loginDto) {
@@ -101,10 +102,10 @@ public class MemberServiceImpl implements MemberService {
 
         final Member member = memberRepository
                 .findFirstByEmail(email)
-                .orElseThrow(() -> new Nespot2BusinessException(Code.EMAIL_NOT_FOUND));
+                .orElseThrow(() -> new InternalAuthenticationServiceException("잘못된 이메일 정보 입니다."));
 
         if (!passwordEncoder.matches(password, member.getPassword())) {
-            throw new Nespot2BusinessException(Code.PASSWORD_NOT_MATCHED);
+            throw new InternalAuthenticationServiceException("패스워드 정보가 잘못되었습니다.");
         }
 
         return memberMapper.map(member);
