@@ -22,6 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author nespot2
  * @version 0.0.1
  * @since 2020/03/04
+ * member repository test
  **/
 @SpringBootTest
 @Transactional
@@ -34,7 +35,6 @@ public class MemberRepositoryTest {
     private PasswordEncoder passwordEncoder;
 
     @Test
-    @Commit
     public void test() {
 
         final Member member = Member.builder()

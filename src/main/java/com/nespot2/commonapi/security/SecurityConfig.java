@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @author nespot2
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final AjaxLoginAuthenticationProvider ajaxLoginAuthenticationProvider;
 
     private AjaxLoginFilter ajaxLoginFilter() throws Exception {
-        final var ajaxLoginFilter = new AjaxLoginFilter("/lsf-login", ajaxLoginAuthenticationSuccessHandler, ajaxLoginAuthenticationFailureHandler);
+        final var ajaxLoginFilter = new AjaxLoginFilter("/login", ajaxLoginAuthenticationSuccessHandler, ajaxLoginAuthenticationFailureHandler);
         ajaxLoginFilter.setAuthenticationManager(super.authenticationManager());
         return ajaxLoginFilter;
     }
@@ -52,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .mvcMatchers("/health");
+                .mvcMatchers("/health","/docs/index.html","/favicon.ico");
 
     }
 
@@ -69,6 +70,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .expressionHandler(expressionHandler());
+
+        http.addFilterBefore(ajaxLoginFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

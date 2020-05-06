@@ -19,6 +19,7 @@ import java.time.OffsetDateTime;
  * @author nespot2
  * @version 0.0.1
  * @since 2020/03/04
+ * profile repository test
  **/
 @SpringBootTest
 @Transactional
@@ -37,7 +38,6 @@ public class ProfileRepositoryTest {
     private ProfileLogRepository profileLogRepository;
 
     @Test
-    @Commit
     public void test() {
 
         final Member member = memberRepository
