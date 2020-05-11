@@ -2,6 +2,7 @@ package com.nespot2.commonapi.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nespot2.commonapi.common.api.ApiResult;
+import com.nespot2.commonapi.member.service.MemberRefreshTokenService;
 import com.nespot2.commonapi.security.account.AccountContext;
 import com.nespot2.commonapi.security.dto.TokenDto;
 import com.nespot2.commonapi.security.jwt.JwtFactory;
@@ -33,6 +34,8 @@ public class AjaxLoginAuthenticationSuccessHandler implements AuthenticationSucc
 
     private final ObjectMapper objectMapper;
 
+    private final MemberRefreshTokenService memberRefreshTokenService;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
@@ -41,12 +44,13 @@ public class AjaxLoginAuthenticationSuccessHandler implements AuthenticationSucc
         final String token = jwtFactory.generateToken(accountContext);
         final String refreshToken = jwtFactory.generateRefreshToken(accountContext);
 
-        //TODO refreshToken, generate token log 저장
+        memberRefreshTokenService.saveRefreshToken(accountContext.getUsername(), refreshToken);
 
         final TokenDto tokenDto = TokenDto.builder()
                 .token(token)
                 .refreshToken(refreshToken)
                 .build();
+
         final ApiResult<TokenDto> apiResult = ApiResult.ok(tokenDto);
 
         final String tokeDtoStr = objectMapper.writeValueAsString(apiResult);

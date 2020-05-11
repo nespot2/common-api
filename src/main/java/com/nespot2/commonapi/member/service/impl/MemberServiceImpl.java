@@ -95,7 +95,8 @@ public class MemberServiceImpl implements MemberService {
      * @throws InternalAuthenticationServiceException
      */
     @Override
-    public MemberDto login(LoginDto loginDto) {
+    @Transactional(readOnly = true)
+    public Member login(LoginDto loginDto) {
 
         final String email = loginDto.getEmail();
         final String password = loginDto.getPassword();
@@ -108,7 +109,6 @@ public class MemberServiceImpl implements MemberService {
             throw new InternalAuthenticationServiceException("패스워드 정보가 잘못되었습니다.");
         }
 
-        return memberMapper.map(member);
+        return member;
     }
-
 }

@@ -1,5 +1,6 @@
 package com.nespot2.commonapi.member.service;
 
+import com.nespot2.commonapi.member.domain.Member;
 import com.nespot2.commonapi.member.domain.dto.LoginDto;
 import com.nespot2.commonapi.member.domain.dto.MemberDto;
 import com.nespot2.commonapi.member.domain.dto.MemberRegisterDto;
@@ -15,5 +16,6 @@ public interface MemberService {
 
     void createMember(MemberRegisterDto memberRegisterDto);
 
-    MemberDto login(LoginDto loginDto);
+    Member login(LoginDto loginDto);
+
 }

@@ -56,7 +56,7 @@ class CommonApiApplicationTests {
 
         final RestDocumentationResultHandler document = document("login",
                 requestFields(
-                        fieldWithPath("email").type(JsonFieldType.STRING).description("이메일").optional(),
+                        fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
                         fieldWithPath("password").type(JsonFieldType.STRING).description("패스워드")
                 ),
                 responseFields(

@@ -1,7 +1,7 @@
 package com.nespot2.commonapi.security.provider;
 
+import com.nespot2.commonapi.member.domain.Member;
 import com.nespot2.commonapi.member.domain.dto.LoginDto;
-import com.nespot2.commonapi.member.domain.dto.MemberDto;
 import com.nespot2.commonapi.member.service.MemberService;
 import com.nespot2.commonapi.security.account.AccountContext;
 import com.nespot2.commonapi.security.token.PostAuthenticationToken;
@@ -26,15 +26,14 @@ public class AjaxLoginAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) {
         final PreAuthenticationToken token = (PreAuthenticationToken) authentication;
 
-
         final LoginDto loginDto = LoginDto.builder()
                 .email((String) token.getPrincipal())
                 .password((String) token.getCredentials())
                 .build();
 
-        final MemberDto memberDto = memberService.login(loginDto);
+        final Member member = memberService.login(loginDto);
 
-        final AccountContext accountContext = new AccountContext(memberDto.getEmail(), memberDto.getPassword(), "ROLE_" + memberDto.getMemberRole().name());
+        final AccountContext accountContext = new AccountContext(member.getEmail(), member.getPassword(), "ROLE_" + member.getRole().name());
 
         return PostAuthenticationToken.fromAccountContext(accountContext);
     }

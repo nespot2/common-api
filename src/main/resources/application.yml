@@ -21,4 +21,10 @@ logging.level:
   org.hibernate.SQL: debug
   org.springframework.web: DEBUG
 
+jwt:
+  signing-key: A1ID2fEN
+  refresh-signing-key: K8TqNt3P
+  refresh-expired-day: 14
+
+
 
