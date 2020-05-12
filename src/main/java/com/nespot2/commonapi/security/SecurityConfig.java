@@ -1,9 +1,14 @@
 package com.nespot2.commonapi.security;
 
 import com.nespot2.commonapi.security.filter.AjaxLoginFilter;
+import com.nespot2.commonapi.security.filter.FilterSkipMatcher;
+import com.nespot2.commonapi.security.filter.JwtAuthenticationFilter;
 import com.nespot2.commonapi.security.handler.AjaxLoginAuthenticationFailureHandler;
 import com.nespot2.commonapi.security.handler.AjaxLoginAuthenticationSuccessHandler;
+import com.nespot2.commonapi.security.handler.JwtAuthenticationFailureHandler;
+import com.nespot2.commonapi.security.jwt.HeaderTokenExtractor;
 import com.nespot2.commonapi.security.provider.AjaxLoginAuthenticationProvider;
+import com.nespot2.commonapi.security.provider.JwtAuthenticationProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.expression.SecurityExpressionHandler;
@@ -16,6 +21,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author nespot2
@@ -33,10 +41,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AjaxLoginAuthenticationProvider ajaxLoginAuthenticationProvider;
 
+    private final JwtAuthenticationFailureHandler jwtAuthenticationFailureHandler;
+
+    private final JwtAuthenticationProvider jwtAuthenticationProvider;
+
+    private final HeaderTokenExtractor headerTokenExtractor;
+
     private AjaxLoginFilter ajaxLoginFilter() throws Exception {
         final var ajaxLoginFilter = new AjaxLoginFilter("/login", ajaxLoginAuthenticationSuccessHandler, ajaxLoginAuthenticationFailureHandler);
         ajaxLoginFilter.setAuthenticationManager(super.authenticationManager());
         return ajaxLoginFilter;
+    }
+
+    private JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
+        final List<String> pathToSkip = Arrays.asList("/login", "/refresh");
+
+        final var processing = "/**";
+        final FilterSkipMatcher filterSkipMatcher = new FilterSkipMatcher(pathToSkip, processing);
+        final var jwtAuthenticationFilter = new JwtAuthenticationFilter(filterSkipMatcher, headerTokenExtractor, jwtAuthenticationFailureHandler);
+        jwtAuthenticationFilter.setAuthenticationManager(super.authenticationManager());
+        return jwtAuthenticationFilter;
     }
 
     public SecurityExpressionHandler expressionHandler() {
@@ -53,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
-                .mvcMatchers("/health","/docs/index.html","/favicon.ico");
+                .mvcMatchers("/health", "/docs/index.html", "/favicon.ico");
 
     }
 
@@ -72,10 +96,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .expressionHandler(expressionHandler());
 
         http.addFilterBefore(ajaxLoginFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(ajaxLoginAuthenticationProvider);
+        auth.authenticationProvider(jwtAuthenticationProvider);
     }
 }
