@@ -23,4 +23,9 @@ public class AccountCategoryRootDto {
     @NotNull
     @NotBlank
     private PaymentType type;
+
+    public AccountCategoryRootDto(String name, PaymentType type) {
+        this.name = name;
+        this.type = type;
+    }
 }
