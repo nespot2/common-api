@@ -44,12 +44,12 @@ public class MemberRefreshToken {
     private Member member;
 
     @Builder
-    public MemberRefreshToken(String refreshToken, CommonDate commonDate, OffsetDateTime expiredAt, YesNo enabled, Member member) {
+    public MemberRefreshToken(String refreshToken, CommonDate commonDate, OffsetDateTime expiredAt, YesNo enabled, long id) {
         this.refreshToken = refreshToken;
         this.commonDate = commonDate;
         this.expiredAt = expiredAt;
         this.enabled = enabled;
-        this.member = member;
+        this.id = id;
     }
 
     public void updateRefreshToken(String refreshToken) {

@@ -57,9 +57,9 @@ public class MemberRefreshTokenServiceImpl implements MemberRefreshTokenService 
             final MemberRefreshToken memberRefreshToken = MemberRefreshToken.builder()
                     .commonDate(new CommonDate(OffsetDateTime.now(), OffsetDateTime.now()))
                     .enabled(YesNo.YES)
-                    .member(member)
                     .expiredAt(OffsetDateTime.now().plusDays(refreshExpiredDay))
                     .refreshToken(refreshToken)
+                    .id(member.getId())
                     .build();
             memberRefreshTokenRepository.save(memberRefreshToken);
         }

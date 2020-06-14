@@ -5,7 +5,7 @@ spring:
       enabled: true
       force: true
   datasource:
-    url: jdbc:mariadb://localhost:3306/profile
+    url: jdbc:mariadb://localhost:3306/account
     username: nespot2
     password: zaq1234!
   jpa:
