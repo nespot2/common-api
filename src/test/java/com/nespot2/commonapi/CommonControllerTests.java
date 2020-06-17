@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @SpringBootTest
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
-class CommonApiApplicationTests {
+class CommonControllerTests {
 
     private MockMvc mockMvc;
 
@@ -54,15 +54,17 @@ class CommonApiApplicationTests {
     @Test
     void login() throws Exception {
 
+        final String codeDescription = "SUCCESS : 성공\nUNAUTHENTICATED : 인증 실패\nERROR : 서버 에러";
+
         final RestDocumentationResultHandler document = document("login",
                 requestFields(
                         fieldWithPath("email").type(JsonFieldType.STRING).description("이메일"),
                         fieldWithPath("password").type(JsonFieldType.STRING).description("패스워드")
                 ),
                 responseFields(
-                        fieldWithPath("c").type(JsonFieldType.STRING).description("code"),
-                        fieldWithPath("m").type(JsonFieldType.STRING).description("message"),
-                        fieldWithPath("t").type(JsonFieldType.STRING).description("time"),
+                        fieldWithPath("c").type(JsonFieldType.STRING).description(codeDescription),
+                        fieldWithPath("m").type(JsonFieldType.STRING).description("결과 메시지"),
+                        fieldWithPath("t").type(JsonFieldType.STRING).description("호출 시간"),
                         fieldWithPath("d.token").type(JsonFieldType.STRING).description("token").optional(),
                         fieldWithPath("d.refreshToken").type(JsonFieldType.STRING).description("refresh token").optional())
         );
