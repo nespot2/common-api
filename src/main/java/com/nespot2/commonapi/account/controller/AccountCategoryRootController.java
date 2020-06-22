@@ -5,12 +5,11 @@ import com.nespot2.commonapi.account.service.AccountCategoryRootService;
 import com.nespot2.commonapi.common.api.ApiResult;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author nespot2
@@ -19,20 +18,14 @@ import javax.validation.Valid;
  **/
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/account")
+@RequestMapping("/account-root")
 public class AccountCategoryRootController {
 
     private final AccountCategoryRootService accountCategoryRootService;
 
-    /**
-     * account category root 생성
-     * @param accountCategoryRootDto
-     * @return
-     */
-    @PostMapping
-    public ResponseEntity<ApiResult> create(@Valid @RequestBody AccountCategoryRootDto accountCategoryRootDto) {
-        return accountCategoryRootService
-                .createAccountCategoryRoot(accountCategoryRootDto)
-                .createResponseEntity();
+    @GetMapping
+    public ResponseEntity<ApiResult<List<AccountCategoryRootDto>>> getAll() {
+        return ApiResult.ok(accountCategoryRootService.getAllAccountCategoryRootDto()).createResponseEntity();
     }
+
 }

@@ -1,7 +1,7 @@
 import com.ewerk.gradle.plugins.tasks.QuerydslCompile
 
 plugins {
-    id("org.springframework.boot") version "2.2.4.RELEASE"
+    id("org.springframework.boot") version "2.2.7.RELEASE"
     id("org.asciidoctor.convert") version "1.5.9.2"
     java
     id("com.ewerk.gradle.plugins.querydsl") version "1.0.10"

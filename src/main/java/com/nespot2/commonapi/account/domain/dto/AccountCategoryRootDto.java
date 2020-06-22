@@ -1,31 +1,35 @@
 package com.nespot2.commonapi.account.domain.dto;
 
 import com.nespot2.commonapi.account.domain.PaymentType;
-import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.time.OffsetDateTime;
 
 /**
  * @author nespot2
  * @version 0.0.1
- * @since 2020/05/13
+ * @since 2020/06/22
  **/
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccountCategoryRootDto {
-    @NotNull
-    @NotBlank
+
+    private long id;
+
     private String name;
 
-    @NotNull
-    @NotBlank
     private PaymentType type;
 
-    public AccountCategoryRootDto(String name, PaymentType type) {
+    private OffsetDateTime createdAt;
+
+    private OffsetDateTime modifiedAt;
+
+    @Builder
+    public AccountCategoryRootDto(long id, String name, PaymentType type, OffsetDateTime createdAt, OffsetDateTime modifiedAt) {
+        this.id = id;
         this.name = name;
         this.type = type;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
     }
 }
