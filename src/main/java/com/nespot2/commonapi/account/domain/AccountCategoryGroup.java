@@ -34,15 +34,10 @@ public class AccountCategoryGroup {
     @Column(nullable = false)
     private YesNo enabled;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "root_id")
-    private AccountCategoryRoot accountCategoryRoot;
-
     @Builder
-    public AccountCategoryGroup(String name, CommonDate commonDate, YesNo enabled, AccountCategoryRoot accountCategoryRoot) {
+    public AccountCategoryGroup(String name, CommonDate commonDate, YesNo enabled) {
         this.name = name;
         this.commonDate = commonDate;
         this.enabled = enabled;
-        this.accountCategoryRoot = accountCategoryRoot;
     }
 }

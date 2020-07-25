@@ -25,7 +25,7 @@ public class AccountPaymentMethod {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private PaymentType type;
+    private AccountPaymentMethodType type;
 
     @Column(nullable = false)
     private String name;
@@ -34,7 +34,7 @@ public class AccountPaymentMethod {
     private CommonDate commonDate;
 
     @Builder
-    public AccountPaymentMethod(PaymentType type, String name, CommonDate commonDate) {
+    public AccountPaymentMethod(AccountPaymentMethodType type, String name, CommonDate commonDate) {
         this.type = type;
         this.name = name;
         this.commonDate = commonDate;
