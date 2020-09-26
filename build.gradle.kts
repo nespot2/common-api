@@ -45,6 +45,7 @@ val snippetsDir by extra { file("$buildDir/generated-snippets") }
 tasks {
 
     test {
+        useJUnitPlatform()
         outputs.dir(snippetsDir)
     }
 
