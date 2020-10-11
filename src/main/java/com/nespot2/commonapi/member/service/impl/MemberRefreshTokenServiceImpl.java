@@ -36,7 +36,7 @@ public class MemberRefreshTokenServiceImpl implements MemberRefreshTokenService 
     /**
      * refreshToken 정보 저장
      *
-     * @param email - email
+     * @param email        - email
      * @param refreshToken - refresh token
      */
     @Override
@@ -59,7 +59,7 @@ public class MemberRefreshTokenServiceImpl implements MemberRefreshTokenService 
                     .enabled(YesNo.YES)
                     .expiredAt(OffsetDateTime.now().plusDays(refreshExpiredDay))
                     .refreshToken(refreshToken)
-                    .id(member.getId())
+                    .member(member)
                     .build();
             memberRefreshTokenRepository.save(memberRefreshToken);
         }

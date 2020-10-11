@@ -39,17 +39,18 @@ public class MemberRefreshToken {
     @Enumerated
     private YesNo enabled;
 
+    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "id")
     private Member member;
 
     @Builder
-    public MemberRefreshToken(String refreshToken, CommonDate commonDate, OffsetDateTime expiredAt, YesNo enabled, long id) {
+    public MemberRefreshToken(String refreshToken, CommonDate commonDate, OffsetDateTime expiredAt, YesNo enabled, Member member) {
         this.refreshToken = refreshToken;
         this.commonDate = commonDate;
         this.expiredAt = expiredAt;
         this.enabled = enabled;
-        this.id = id;
+        this.member = member;
     }
 
     public void updateRefreshToken(String refreshToken) {
